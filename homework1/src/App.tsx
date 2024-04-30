@@ -16,7 +16,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="container pt-3">
       <DisplayBook books={books} />
       <AddBook setBooks={setBooks} books={books} />
     </div>

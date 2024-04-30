@@ -18,6 +18,16 @@ export default function AddBook({ setBooks, books }: addBookProps) {
   });
   const [isError, setIsError] = useState<string>("");
   const addBook = async () => {
+    if (
+      !newBook.title ||
+      !newBook.format ||
+      !newBook.genre ||
+      !newBook.isbn ||
+      !newBook.summary
+    ) {
+      setIsError("Could not add book");
+      return;
+    }
     const addnewBook = { ...newBook, id: nanoid() };
 
     try {
@@ -46,14 +56,20 @@ export default function AddBook({ setBooks, books }: addBookProps) {
   };
 
   return (
-    <div>
+    <div className="container mt-5">
+      <h3>Add New Book</h3>
+
       <input
+        className="form-control mb-3"
+        placeholder="Title"
         type="text"
         name="title"
         value={newBook.title}
         onChange={inputHandler}
       ></input>
       <input
+        className="form-control mb-3"
+        placeholder="Format"
         type="text"
         name="format"
         value={newBook.format}
@@ -62,22 +78,30 @@ export default function AddBook({ setBooks, books }: addBookProps) {
       <input
         type="text"
         name="genre"
+        className="form-control mb-3"
+        placeholder="Genre"
         value={newBook.genre}
         onChange={inputHandler}
       ></input>
       <input
         type="text"
         name="isbn"
+        className="form-control mb-3"
+        placeholder="ISBN"
         value={newBook.isbn}
         onChange={inputHandler}
       ></input>
       <input
         type="text"
         name="summary"
+        className="form-control mb-3"
+        placeholder="Summary"
         value={newBook.summary}
         onChange={inputHandler}
       ></input>
-      <button onClick={addBook}>submit</button>
+      <button className="btn btn-primary mt-3" onClick={addBook}>
+        Submit
+      </button>
     </div>
   );
 }
